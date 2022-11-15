@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        $(document).ready(function () {
+            $('#btn-save').click(function () {
+                let data = {
+                    title: $("#title").val(),
+                    writer: $("#writer").val(),
+                    content: $("#content").val()
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '/api/save',
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        alert("작성완료");
+                        location.href = "/";
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-    <form  action="/post" method="post">
-        제목 : <input type="text" name="title"> <br>
-        작성자 : <input type="text" name="writer"> <br>
-        <textarea name="content"></textarea><br>
+    <div>
+        제목 : <input type="text" name="title" id="title"> <br>
+        작성자 : <input type="text" name="writer" id="writer"> <br>
+        <textarea name="content" id="content"></textarea><br>
 
-        <input type="submit" value="등록">
-    </form>
+        <input type="button" id= "btn-save" value="등록">
+    </div>
 </body>
 </html>
