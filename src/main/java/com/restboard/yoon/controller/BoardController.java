@@ -15,8 +15,8 @@ import java.util.List;
                 // MVC에서 컨트롤러로 명시된 클래스의 메서드들은 return 값으로 템플릿 경로를 작성하거나, redirect를 해줘야 합니다.
 @AllArgsConstructor
 public class BoardController {
-    private BoardService boardService;
 
+    private BoardService boardService;
     //게시글 목록
     @GetMapping("/")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
@@ -30,20 +30,19 @@ public class BoardController {
     }
 
 
+    @RequestMapping("/")
+    public String list() {
+        return "board/list.html";
+    }
+
+
     // 게시글 추가
-    @GetMapping("/post")
+    //RequestMapping은 메소드 지정을 안해서 씀
+    @RequestMapping("/post")
     public String write() {
         return "board/write.html";
     }
-
-    //게시글 DB Insert 함수(wirte 메서드)
-    @PostMapping("/post")
-    public String write(BoardDto boardDto) {
-        boardService.savePost(boardDto);
-
-        return "redirect:/";
-    }
-
+    
     // 게시글 상세조회 페이지
     @GetMapping("/post/{no}")
     public String detail(@PathVariable("no") Long no, Model model) {
