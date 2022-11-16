@@ -10,41 +10,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-@Controller    // 컨트롤러임을 명시하는 어노테이션
-                // MVC에서 컨트롤러로 명시된 클래스의 메서드들은 return 값으로 템플릿 경로를 작성하거나, redirect를 해줘야 합니다.
+@Controller // 컨트롤러임을 명시하는 어노테이션
+            // MVC에서 컨트롤러로 명시된 클래스의 메서드들은 return 값으로 템플릿 경로를 작성하거나, redirect를 해줘야 합니다.
 @AllArgsConstructor
 public class BoardController {
 
     private BoardService boardService;
-    //게시글 목록
-    @GetMapping("/")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
-        List<BoardDto> boardList = boardService.getBoardlist(pageNum);
-        Integer[] pageList = boardService.getPageList(pageNum);
-
-        model.addAttribute("boardList", boardList);
-        model.addAttribute("pageList", pageList);
-
-        return "board/list.html";
-    }
-
 
     @RequestMapping("/")
     public String list() {
         return "board/list.html";
     }
 
-
     // 게시글 추가
-    //RequestMapping은 메소드 지정을 안해서 씀
+    // RequestMapping은 메소드 지정을 안해서 씀
     @RequestMapping("/post")
     public String write() {
         return "board/write.html";
     }
-    
+
     // 게시글 상세조회 페이지
-    @GetMapping("/post/{no}")
+    @RequestMapping("/post/{no}")
     public String detail(@PathVariable("no") Long no, Model model) {
         BoardDto boardDTO = boardService.getPost(no);
 
@@ -52,11 +38,11 @@ public class BoardController {
         return "board/detail.html";
     }
 
-    //게시글 수정 페이지
-    @GetMapping("/post/edit/{no}")
+    // 게시글 수정 페이지
+    @RequestMapping("/post/edit/{no}")
     public String edit(@PathVariable("no") Long no, Model model) {
         BoardDto boardDTO = boardService.getPost(no);
-
+  
         model.addAttribute("boardDto", boardDTO);
         return "board/update.html";
     }
@@ -74,7 +60,7 @@ public class BoardController {
     public String delete(@PathVariable("no") Long no) {
         boardService.deletePost(no);
 
-        return "redirect:/";    
+        return "redirect:/";
     }
 
     // 게시글 검색
