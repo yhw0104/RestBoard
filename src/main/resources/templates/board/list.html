@@ -2,10 +2,29 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <meta charset="UTF-8">
     <title>Title</title>
-
     <link rel="stylesheet" th:href="@{/css/board.css/}">
+    <script>
+        $(function(){
+            let boardlist = new Vue({
+                el: "#blist",
+                data : {
+                    boardlist:{}
+                }
+            })
+            $.ajax({
+                type : "get",
+                url: '/api/list',
+                success: function (response) {
+                    console.dir(response);
+                    boardlist.boardlist = response;
+                }
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -24,22 +43,22 @@
             </tr>
         </thead>
 
-        <tbody>
+        <tbody id="blist">
             <!-- CONTENTS !-->
-            <tr th:each="board : ${boardList}">
+            <tr v-for="index in boardlist">
                 <td>
-                    <span th:text="${board.id}"></span>
+                    <span>{{ index.id }}</span>
                 </td>
                 <td>
-                    <a th:href="@{'/post/' + ${board.id}}">
-                        <span th:text="${board.title}"></span>
+                    <a v-bind:href='`/post/${index.id}`'>
+                        <span>{{ index.title }}</span>
                     </a>
                 </td>
                 <td>
-                    <span th:text="${board.writer}"></span>
+                    <span>{{ index.writer }}</span>
                 </td>
                 <td>
-                    <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                    <span>{{ index.createdDate }}</span>
                 </td>
             </tr>
         </tbody>
@@ -54,11 +73,11 @@
         <button>검색하기</button>
     </form>
 
-    <div>
+    <!-- <div>
         <span th:each="pageNum : ${pageList}" th:inline="text">
             <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
         </span>
-    </div>
+    </div> -->
 
     <!-- FOOTER -->
     <div th:insert="common/footer.html" id="footer"></div>
