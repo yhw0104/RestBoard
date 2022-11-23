@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        $(function(){
+            let id = $(location).attr('href').split('/')[5] // $(location).attr('href') => 현재 URL주소. .split('/')[4] => /으로 주소를 나눴을 때 5번째 문자열 
+            // console.log(id)
+            $.get('/api/post/edit/' + id, // GetMapping 주소
+            function(response){             // => 함수의 인자를 그냥 response로 지정 
+                console.dir(response);      //  => 매개변수로 전달된 객체의 속성을 출력
+                let title = $("#title").html(response.title)
+                $("#content").html(response.content)        // => response의 객체들을 출력함
+                let writer = $("#writer").html(response.writer)              
+            })
+        })
+    </script>
 </head>
 <body>
-<form th:action="@{'/post/edit/' + ${boardDto.id}}" method="post">
-    <input type="hidden" name="_method" value="put"/>
-    <input type="hidden" name="id" th:value="${boardDto.id}"/>
+<div>    
+    제목 : <input type="text" id="title">
+    <script>
+        document.getElementById('title').value = 'title';
+    </script>
+    <br>
+    작성자 : <input type="text" id = "writer">
+    <script>
+        document.getElementById('writer').value = writer;
+    </script>
 
-    제목 : <input type="text" name="title" th:value="${boardDto.title}"> <br>
-    작성자 : <input type="text" name="writer" th:value="${boardDto.writer}"> <br>
-    <textarea name="content" th:text="${boardDto.content}"></textarea><br>
+    <br>
 
-    <input type="submit" value="수정">
-</form>
+    <textarea name="content" id="content"></textarea><br>
+
+    <input type="button" value="수정" id = "btn-revise">
+</div>
 </body>
 </html>

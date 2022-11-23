@@ -28,25 +28,20 @@ public class BoardController {
     public String write() {
         return "board/write.html";
     }
-
+    
     // 게시글 상세조회 페이지
     @RequestMapping("/post/{no}")
-    public String detail(@PathVariable("no") Long no, Model model) {
-        BoardDto boardDTO = boardService.getPost(no);
-
-        model.addAttribute("boardDto", boardDTO);
+    public String detail() {
         return "board/detail.html";
     }
 
+    //여기
     // 게시글 수정 페이지
     @RequestMapping("/post/edit/{no}")
-    public String edit(@PathVariable("no") Long no, Model model) {
-        BoardDto boardDTO = boardService.getPost(no);
-  
-        model.addAttribute("boardDto", boardDTO);
+    public String edit() {
         return "board/update.html";
     }
-
+    
     // 게시글 수정
     @PutMapping("/post/edit/{no}")
     public String update(BoardDto boardDTO) {
