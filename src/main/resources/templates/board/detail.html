@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        $(function(){
+            let id = $(location).attr('href').split('/')[4] // $(location).attr('href') => 현재 URL주소. .split('/')[4] => /으로 주소를 나눴을 때 5번째 문자열 
+            $.get('/api/post/' + id, // GetMapping 주소
+            function(response){             // => 함수의 인자를 그냥 response로 지정 
+                console.dir(response);      //  => 매개변수로 전달된 객체의 속성을 출력
+                $("#title").html(response.title)
+                $("#regDate").html(response.createdDate)
+                $("#content").html(response.content)        // => response의 객체들을 출력함
+            })
+
+            $('#edit-btn').click(function () {
+                $.ajax({
+                    success: function() {
+                        location.href ="/post/edit/" + id;
+                    } 
+                })
+            })
+        })
+    </script>
 </head>
 <body>
 
-<h2 th:text="${boardDto.title}"></h2>
-<p th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]]</p>
+<h2 id="title"></h2>
+<p>작성일 :</p>
+<p id="regDate"></p>
 
-<p th:text="${boardDto.content}"></p>
+<p id="content"></p>
 
 <!-- 수정/삭제 -->
 <div>
-    <a th:href="@{'/post/edit/' + ${boardDto.id}}">
-        <button>수정</button>
+    <a>
+
+        <button id="edit-btn">수정</button>
     </a>
 
-    <form id="delete-form" th:action="@{'/post/' + ${boardDto.id}}" method="post">
+    <form id="delete-form" method="post">
         <input type="hidden" name="_method" value="delete"/>
         <button id="delete-btn">삭제</button>
     </form>
 </div>
 
-<!-- 변수 셋팅 -->
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var boardDto = /*[[${boardDto}]]*/ "";
-    /*]]>*/
-</script>
-
-<!-- script -->
-<script th:inline="javascript" th:src="@{/js/board.js}"></script>
 </body>
 </html>
