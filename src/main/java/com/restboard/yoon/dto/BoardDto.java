@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BoardDto {
     private Long id;
     private String writer;
@@ -25,15 +27,5 @@ public class BoardDto {
                 .content(content)
                 .build();
         return boardEntity;
-    }
-
-    @Builder
-    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
-        this.id = id;
-        this.writer = writer;
-        this.title = title;
-        this.content = content;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
     }
 }

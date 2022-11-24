@@ -35,28 +35,19 @@ public class BoardController {
         return "board/detail.html";
     }
 
-    //여기
     // 게시글 수정 페이지
     @RequestMapping("/post/edit/{no}")
     public String edit() {
         return "board/update.html";
     }
-    
-    // 게시글 수정
-    @PutMapping("/post/edit/{no}")
-    public String update(BoardDto boardDTO) {
-        boardService.savePost(boardDTO);
 
-        return "redirect:/";
-    }
 
-    // 게시글 삭제
-    @DeleteMapping("/post/{no}")
-    public String delete(@PathVariable("no") Long no) {
-        boardService.deletePost(no);
+    // // 게시글 삭제
+    // @RequestMapping("/post/{no}")
+    // public String delete(@PathVariable("no") Long no) {
 
-        return "redirect:/";
-    }
+    //     return "redirect:/";
+    // }
 
     // 게시글 검색
     // 특별한 것은 없고, 클라이언트에서 넘겨주는 keyword를 검색어로 활용
