@@ -25,3 +25,10 @@ List.html에 js 삽입 -> vue.js를 사용하여 페이지 실행시 게시글 �
  
  게시글 수정 RestController 작성
  - update.html에서 put 방식을 이용하여 데이터 수정 (작성중)
+
+11/24
+---
+게시글 수정 완성
+ - 게시글 수정페이지와 상세조회 페이지 get방식 호출 같아 게시글 수정페이지 GetMapping 삭제 (메모리 낭비 최소화)
+ - 람다, 컬렉션 프레임워크 이용하여 BoardService.java에 수정 메서드 추가
+ - ajax를 사용하여 데이터 
