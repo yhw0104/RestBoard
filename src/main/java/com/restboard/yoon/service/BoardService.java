@@ -67,9 +67,8 @@ public class BoardService {
 
     //게시글 삭제
     @Transactional
-    public String deletePost(Long id) {
+    public void deletePost(Long id) {
         boardRepository.deleteById(id);
-        return null;
     }
 
     // 게시글 목록

@@ -29,8 +29,6 @@ public class RestBoardController {
     public Long write(@RequestBody BoardDto boardDto) {
         return boardService.savePost(boardDto);
     }
-
-    
     
     // @GetMapping은 페이지에 데이터를 받아옴
     // 게시글 목록
@@ -57,7 +55,7 @@ public class RestBoardController {
     // 여기
     // 게시글 삭제
     @DeleteMapping("/delete/{no}")
-    public String delete(@PathVariable("no") Long no) {
-        return boardService.deletePost(no);
+    public void delete(@PathVariable("no") Long no) {
+        boardService.deletePost(no);
     }
 }
