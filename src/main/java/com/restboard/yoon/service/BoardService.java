@@ -11,6 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.lang.StackWalker.Option;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,10 +46,30 @@ public class BoardService {
         return boardDTO;
     }
 
+    // 게시글 업데이트
+    @Transactional
+    public BoardDto updateDto(Long id, BoardDto boardDto){
+        Optional<BoardEntity> post = boardRepository.findById(id);
+
+        
+        return post.map(p -> {
+            p.setTitle(boardDto.getTitle());
+            p.setWriter(boardDto.getWriter());
+            p.setContent(boardDto.getContent());
+            p.setModifiedDate(LocalDateTime.now());
+
+            return p;
+        })
+        .map(p -> boardRepository.save(p))
+        .map(p -> p.toDto())
+        .orElseGet(null);
+    }
+
     //게시글 삭제
     @Transactional
-    public void deletePost(Long id) {
+    public String deletePost(Long id) {
         boardRepository.deleteById(id);
+        return null;
     }
 
     // 게시글 목록

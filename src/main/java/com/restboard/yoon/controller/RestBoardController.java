@@ -31,6 +31,7 @@ public class RestBoardController {
     }
 
     
+    
     // @GetMapping은 페이지에 데이터를 받아옴
     // 게시글 목록
     @GetMapping("/list")
@@ -47,13 +48,16 @@ public class RestBoardController {
         return boardDTO;
     }
 
-    // 여기
-    // 게시글 수정 페이지
-    @GetMapping("/post/edit/{no}")
-    public BoardDto edit(@PathVariable("no") Long no) {
-        BoardDto boardDto = boardService.getPost(no);
-
-        return boardDto;
+    // 게시글 수정
+    @PutMapping("/post/edit/{no}")
+    public BoardDto update(@PathVariable(name = "no") Long no,@RequestBody BoardDto boardDTO) {
+        return boardService.updateDto(no, boardDTO);
     }
 
+    // 여기
+    // 게시글 삭제
+    @DeleteMapping("/delete/{no}")
+    public String delete(@PathVariable("no") Long no) {
+        return boardService.deletePost(no);
+    }
 }
