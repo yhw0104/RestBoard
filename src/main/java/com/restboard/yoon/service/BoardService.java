@@ -4,15 +4,10 @@ import com.restboard.yoon.domain.entity.BoardEntity;
 import com.restboard.yoon.dto.BoardDto;
 import com.restboard.yoon.domain.repository.BoardRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-import java.lang.StackWalker.Option;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

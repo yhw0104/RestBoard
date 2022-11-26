@@ -1,7 +1,5 @@
 package com.restboard.yoon.controller;
 
-
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import lombok.AllArgsConstructor;
 import com.restboard.yoon.service.BoardService;

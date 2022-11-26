@@ -27,9 +27,11 @@
                 $.ajax({
                     type: 'delete',
                     url: '/api/delete/' + id,
+                    data: id, 
                     success: function() {
+                        console.dir(id);
                         alert("삭제 완료");
-                        location.href = "/";
+                        location.href = "/delete/" + id;
                     }
                 })
             })
