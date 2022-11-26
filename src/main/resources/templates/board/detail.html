@@ -7,6 +7,7 @@
     <script>
         $(function(){
             let id = $(location).attr('href').split('/')[4] // $(location).attr('href') => 현재 URL주소. .split('/')[4] => /으로 주소를 나눴을 때 5번째 문자열 
+            
             $.get('/api/post/' + id, // GetMapping 주소
             function(response){             // => 함수의 인자를 그냥 response로 지정 
                 console.dir(response);      //  => 매개변수로 전달된 객체의 속성을 출력
@@ -27,10 +28,7 @@
                 $.ajax({
                     type: 'delete',
                     url: '/api/delete/' + id,
-                    data: id, 
                     success: function() {
-                        console.dir(id);
-                        alert("삭제 완료");
                         location.href = "/delete/" + id;
                     }
                 })
