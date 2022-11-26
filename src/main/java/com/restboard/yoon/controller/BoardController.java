@@ -44,8 +44,7 @@ public class BoardController {
 
     // 게시글 삭제
     @RequestMapping("/delete/{no}")
-    public String delete(@PathVariable("no") Long no) {
-
+    public String delete() {
         return "redirect:/";
     }
 
