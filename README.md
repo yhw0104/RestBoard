@@ -37,3 +37,8 @@ List.html에 js 삽입 -> vue.js를 사용하여 페이지 실행시 게시글 �
  - delete 메서드 RestController에 작성
  - detail.html에 ajax를 사용하여 delete 방식으로 게시글 삭제 코드 작성중
   - postman으로 게시글 삭제 됨(삭제 버튼 클릭시 메인 페이지로 안넘어감 -> ajax 수정 필요)
+
+11/27
+---
+게시글 삭제
+ - ajax 문제 (페이지 이동이 안됨)
