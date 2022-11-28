@@ -50,3 +50,6 @@ List.html에 js 삽입 -> vue.js를 사용하여 페이지 실행시 게시글 �
  - \<form\>태그 삭제
  - 게시글 삭제 완성
  
+---
+url 자원 낭비
+ - url 자원을 낭비 하지 않게 location.href를 "/" 로 변경하여 BoardController.java의 삭제 메서드를 지움
