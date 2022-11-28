@@ -53,3 +53,6 @@ List.html에 js 삽입 -> vue.js를 사용하여 페이지 실행시 게시글 �
 ---
 url 자원 낭비
  - url 자원을 낭비 하지 않게 location.href를 "/" 로 변경하여 BoardController.java의 삭제 메서드를 지움
+ 
+게시글 삭제 메서드 return 값 생성
+ - Object 타입 이용 return 값으로 데이터 삭제
