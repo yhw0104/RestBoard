@@ -22,6 +22,7 @@ public class RestBoardController {
     // js로 연결시켜 다음 페이지로 넘길 수 있게 만든다. (ajax사용)
     // @RequestMapping(value = "/post", method = RequestMethod.POST)처럼 사용 가능
     // 데이터 송신을 위한 url이라 눈에 안보임 ( write.html 의 등록 버튼 누르면 /post/save url에 데이터가 전달된다.)
+    
     // 게시글 저장
     @PostMapping("/save")
     public Long write(@RequestBody BoardDto boardDto) {
@@ -44,7 +45,7 @@ public class RestBoardController {
         return boardDTO;
     }
 
-    // 게시글 수정
+    // 게시글 수정 
     @PutMapping("/post/edit/{no}")
     public BoardDto update(@PathVariable(name = "no") Long no,@RequestBody BoardDto boardDTO) {
         return boardService.updateDto(no, boardDTO);
@@ -52,7 +53,7 @@ public class RestBoardController {
 
     // 게시글 삭제
     @DeleteMapping("/delete/{no}")
-    public void delete(@PathVariable("no") Long no) {
-        boardService.deletePost(no);
+    public Object delete(@PathVariable("no") Long no) {
+       return boardService.deletePost(no);
     }
 }
