@@ -50,7 +50,6 @@ public class RestBoardController {
         return boardService.updateDto(no, boardDTO);
     }
 
-    // 여기
     // 게시글 삭제
     @DeleteMapping("/delete/{no}")
     public void delete(@PathVariable("no") Long no) {
