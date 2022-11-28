@@ -41,13 +41,6 @@ public class BoardController {
         return "board/update.html";
     }
 
-
-    // 게시글 삭제
-    // @RequestMapping("/delete/{no}")
-    // public String delete() {
-    //     return "redirect:/";
-    // }
-
     // 게시글 검색
     // 특별한 것은 없고, 클라이언트에서 넘겨주는 keyword를 검색어로 활용
     @GetMapping("/board/search")
