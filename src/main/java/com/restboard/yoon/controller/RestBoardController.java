@@ -62,5 +62,6 @@ public class RestBoardController {
         } catch(Exception e) {
             return new ResponseEntity<String>("delete failure", HttpStatus.BAD_REQUEST);
         }
+        
     }
 }
