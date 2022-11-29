@@ -1,5 +1,7 @@
 package com.restboard.yoon.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.AllArgsConstructor;
 import com.restboard.yoon.service.BoardService;
@@ -53,7 +55,12 @@ public class RestBoardController {
 
     // 게시글 삭제
     @DeleteMapping("/delete/{no}")
-    public Object delete(@PathVariable("no") Long no) {
-       return boardService.deletePost(no);
+    public ResponseEntity<String> delete(@PathVariable("no") Long no) {
+        try {
+            boardService.deletePost(no);
+            return new ResponseEntity<String>("delete success", HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<String>("delete failure", HttpStatus.BAD_REQUEST);
+        }
     }
 }
