@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/board.css/}">
     <script>
         $(function(){
-            let boardlist = new Vue({
+            let boardlists = new Vue({
                 el: "#blist",
                 data : {
                     boardlist:{}
@@ -20,7 +20,7 @@
                 url: '/api/list',
                 success: function (response) {
                     console.dir(response);
-                    boardlist.boardlist = response;
+                    boardlists.boardlist = response;
                 }
             })
         })
