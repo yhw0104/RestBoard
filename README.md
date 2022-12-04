@@ -56,3 +56,14 @@ url 자원 낭비
  
 게시글 삭제 메서드 return 값 생성
  - Object 타입 이용 return 값으로 데이터 삭제
+ 
+ 11/29
+ ---
+ 게시글 삭제
+ - Object 반환타입이 아니라 상태코드 반환을 위한 return 값을 주기 위해 변경
+ - ResponseEntity를 사용하여 게시글 삭제 정상 처리 됐을 때는 OK 반환
+ - 게시글 삭제 오류일 때는 BAD_REQUEST 반환
+ 
+ 12/4
+ ---
+ List.html 게시글 메인 페이지에서 사용한 vue.js 공부
