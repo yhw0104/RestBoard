@@ -6,17 +6,22 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/board.css/}">
+    <link rel="stylesheet" href="../../static/css/board.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
     <script>
-        $(function(){
+        $(function () {
             let boardlists = new Vue({
                 el: "#blist",
-                data : {
-                    boardlist:{}
+                data: {
+                    boardlist: {}
                 }
             })
             $.ajax({
-                type : "get",
+                type: "get",
                 url: '/api/list',
                 success: function (response) {
                     console.dir(response);
@@ -31,48 +36,54 @@
     <!-- HEADER -->
     <div th:insert="common/header.html" id="header"></div>
 
-    <a th:href="@{/post}">글 작성</a>
+    <div class="MainContainer">
+        <form class= "container"action="/board/search" method="GET">
+            <div style = "float: right;">
+                <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+                <button type="button" class="btn btn-primary">검색하기</button>
+            </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th class="one wide">번호</th>
-                <th class="ten wide">글제목</th>
-                <th class="two wide">작성자</th>
-                <th class="three wide">작성일</th>
-            </tr>
-        </thead>
+            <button type="button" class="btn btn-primary"><a th:href="@{/post}" style="text-decoration-line: none; color: white;">글 작성</a></button>
 
-        <tbody id="blist">
-            <!-- CONTENTS !-->
-            <tr v-for="index in boardlist">
-                <td>
-                    <span>{{ index.id }}</span>
-                </td>
-                <td>
-                    <a v-bind:href='`/post/${index.id}`' id="detail">
-                        <span>{{ index.title }}</span>
-                    </a>
-                </td>
-                <td>
-                    <span>{{ index.writer }}</span>
-                </td>
-                <td>
-                    <span>{{ index.createdDate }}</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        </form>
+        <div class="table">
+            <table class="table" style="margin-left: 300px;
+            width: 1320px;
+            margin-right: 300px;">
+                <thead>
+                    <tr>
+                        <th class="one wide">번호</th>
+                        <th class="ten wide">글제목</th>
+                        <th class="two wide">작성자</th>
+                        <th class="three wide">작성일</th>
+                    </tr>
+                </thead>
 
-    <!-- 검색 form -->
-    <form action="/board/search" method="GET">
-        <div>
-            <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+                <tbody id="blist">
+                    <!-- CONTENTS !-->
+                    <tr v-for="index in boardlist">
+                        <td>
+                            <span>{{ index.id }}</span>
+                        </td>
+                        <td>
+                            <a v-bind:href='`/post/${index.id}`' id="detail">
+                                <span>{{ index.title }}</span>
+                            </a>
+                        </td>
+                        <td>
+                            <span>{{ index.writer }}</span>
+                        </td>
+                        <td>
+                            <span>{{ index.createdDate }}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <button>검색하기</button>
-    </form>
-
+        <!-- 검색 form -->
+        
+    </div>
     <!-- <div>
         <span th:each="pageNum : ${pageList}" th:inline="text">
             <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
